@@ -3,18 +3,21 @@
 import argparse
 
 def find_max_profit(prices):
-  min_so_far = prices[0]
-  potential_max = 0
-  max_so_far = 0
+  potential_max = []
 
-  for price in prices:
-    min_so_far = min(min_so_far, price)
-    potential_max = price - min_so_far
-    max_so_far = max(max_so_far, potential_max)
+  for i in range(len(prices)):
+    if i < len(prices) - 1:
+      #compute price diff between bought at price[i] and subsequent prices
+      price_diff = [rest - prices[i] for rest in prices[i+1:]]
 
-  return max_so_far
+      #calculate max profit at that price
+      max_for_each = max(price_diff)
 
-     
+      #add to list of potential max profits
+      potential_max.append(max_for_each)
+  
+  return max(potential_max)
+
 
 if __name__ == '__main__':
   # This is just some code to accept inputs from the command line
