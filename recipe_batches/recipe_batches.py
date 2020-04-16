@@ -3,7 +3,18 @@
 import math
 
 def recipe_batches(recipe, ingredients):
-  pass 
+  batches = []
+  for key in recipe:
+    #check if ingredients has all the required recipes
+    if key not in ingredients:
+      return 0
+
+    try:
+      batches.append(ingredients[key] // recipe[key])
+    except KeyError as err:
+      print(f"{err} is unavailable")
+      
+  return min(batches)
 
 
 if __name__ == '__main__':
